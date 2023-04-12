@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
     email : {
         required : true,
         type : String,
-        unique : true
+        unique : true,
+        lowercase : true
     },
     password : {
         type : String,
@@ -30,6 +31,7 @@ userSchema.statics.login = async function(email, password) {
         console.log("Login Method");    
         const auth = bcrypt.compare(password, user.password);
         if(auth) {
+            console.log(user);
             return user;
         }
     }
